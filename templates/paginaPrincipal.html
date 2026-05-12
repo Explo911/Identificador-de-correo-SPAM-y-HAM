@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Detector de Spam</title>
+    </head>
+    <style>
+        body{ background-color: #000000; }
+
+        .searchBox{
+		text-align: center;
+		padding-top: 20px;
+		padding-bottom: 20px;
+	    }
+
+	    textarea{
+	        width: 60%;
+	        height:100px;
+	        resize:vertical;
+	    }
+	    button{
+	        width: 60%;
+	        background-color: #FFFFFF;
+	        padding: 10px;
+	        font-size:20px;
+	        border-radius: 4px;
+	        border: none;
+	    }
+
+	    .results{
+	        text-align: center;
+	    }
+	    h1{
+	        color: #FFFFFF;
+	        font-family:Arial, Helvetica, sans-serif;
+	    }
+	    h2{
+	        color: #FFFFFF;
+	        font-family:Arial, Helvetica, sans-serif;
+	    }
+    </style>
+    <body>
+        <div class = "searchBox">
+            <h1>Detector de correos Spam</h1>
+            <h2>Introduce tu correo</h2>
+            <form action="/Prediccion" method="POST">
+                <textarea name="predict" id="predict"></textarea>
+                <br>
+                <button>Analiza Correo</button>
+            </form>
+        </div>
+        <hr style="height:2px; color:#FFFFFF; background-color:#FFFFFF; border-width:0;">
+        <div class="results">
+            <img src="{{url_for('static', filename='spamton.png')}}" width="300">
+            <h1>Resultados</h1>
+            {% if result %}
+                {% if result == 'H' %}
+                    <h2>Este correo ha sido clasificado como HAM</h2>
+                {% else %}
+                    <h2>Este correo ha sido clasificado como SPAM</h2>
+                {% endif %}
+            {% else %}
+                <h2>No hay correo -> No hay clasificación</h2>
+            {% endif %}
+            <img src="{{url_for('static', filename='spamton.png')}}" width="300">
+        </div>
+    </body>
+</html>
